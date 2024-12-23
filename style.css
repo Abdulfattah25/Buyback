@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "roboto", sans-serif;
+  
+  }
+  :root {
+    --warna : radial-gradient(ellipse at 0% 100%, rgba(104,128,138,0.4) 10%, rgba(138,114,76,0) 40%),
+                          linear-gradient(to top, rgba(57,173,219,0.25) 0%, rgba(42,60,87,0.4) 100%),
+                          linear-gradient(135deg, #19325a 0%, #bac5db 100%);
+  }
+  
+  /*css index*/
+  body {
+    overflow-x: hidden;
+  }
+  .nav-brand a {
+    font-weight: 500;
+    font-size: 20px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+  }
+  nav img {
+    border-radius: 50%;
+    width: 40px;
+  }
+  nav {
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding: 10px;
+    position:fixed;
+    width: 100%;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+  }
+  
+  .boxPk {
+    background-color: #00bbf9;
+  }
+  .report {
+    background-color: #6eeb83;
+  }
+  main {
+    display: flex;
+    padding-top:3rem;
+  }
+  .mainbar {
+   width: 85%;
+    margin-left: 15%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .title {
+    font-size: 16px;  /* Sesuaikan ukuran yang diinginkan */
+} 
+.form-label {
+    font-size: 16px;
+}
+  aside {
+    width: 15%;
+    background: var(--warna);
+    position: fixed;
+    height: 100%;
+    margin-left: 0;    
+  }
+  aside ul {
+    padding-left: 5px;
+    height: 100%;
+    width: 100%;
+  }
+  aside li {
+    line-height: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  aside ul li a {
+    color: #e7e7e7;
+    font-size: 0.9rem;
+    font-weight: 100;
+    display: block;
+    width: 100%;
+    border-left: 1px;
+    position: relative;
+    padding-left: 5px;
+    text-decoration: none;
+  }
+  
+  aside ul li a:hover {
+    color: white;
+    border-left: 1px solid;
+    border-left-color: white;
+  }
+  
+ 
+  
+  /*css saldo awal*/
+  
+  .maintop{
+    height: 40px;
+    color: #e6e6e6;
+    padding: 10px 0 0 10px;
+    font-size: 0.9rem;
+    background: var(--warna);  
+  }
+  
