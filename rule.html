@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pengaturan Persentase Penerimaan</title>
+    <style>
+        .settings-group {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .input-group {
+            margin: 5px 0;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Pengaturan Persentase Penerimaan</h2>
+    
+    <div class="settings-group">
+        <h3>Harga Beli > 93% Harga Hari Ini</h3>
+        <div class="input-group">
+            <h4>Kondisi Sangat Bagus</h4>
+            <div>
+                <label>Skala 1:</label>
+                <input type="number" id="high-veryGood-scale1" min="0" max="100" step="0.1">
+            </div>
+            <div>
+                <label>Skala 2:</label>
+                <input type="number" id="high-veryGood-scale2" min="0" max="100" step="0.1">
+            </div>
+            <div>
+                <label>Skala 3:</label>
+                <input type="number" id="high-veryGood-scale3" min="0" max="100" step="0.1">
+            </div>
+        </div>
+        <!-- Add similar groups for other conditions -->
+    </div>
+
+    <button onclick="saveSettings()">Simpan Pengaturan</button>
+
+    <script src="js/config.js"></script>
+    <script>
+        // Load current values
+        function loadCurrentValues() {
+            document.getElementById('high-veryGood-scale1').value = acceptanceConfig.highPrice.veryGood.scale1;
+            document.getElementById('high-veryGood-scale2').value = acceptanceConfig.highPrice.veryGood.scale2;
+            document.getElementById('high-veryGood-scale3').value = acceptanceConfig.highPrice.veryGood.scale3;
+            // Load other values similarly
+        }
+
+        function saveSettings() {
+            // Save to localStorage
+            acceptanceConfig.highPrice.veryGood.scale1 = parseFloat(document.getElementById('high-veryGood-scale1').value);
+            acceptanceConfig.highPrice.veryGood.scale2 = parseFloat(document.getElementById('high-veryGood-scale2').value);
+            acceptanceConfig.highPrice.veryGood.scale3 = parseFloat(document.getElementById('high-veryGood-scale3').value);
+            
+            localStorage.setItem('acceptanceConfig', JSON.stringify(acceptanceConfig));
+            alert('Pengaturan berhasil disimpan!');
+        }
+
+        // Load saved settings if any
+        if(localStorage.getItem('acceptanceConfig')) {
+            acceptanceConfig = JSON.parse(localStorage.getItem('acceptanceConfig'));
+        }
+        
+        loadCurrentValues();
+    </script>
+</body>
+</html>

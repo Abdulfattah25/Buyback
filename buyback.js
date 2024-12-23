@@ -14,7 +14,6 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
 
     // Logika untuk menentukan persentase penerimaan
     if (persentaseBeli > 93) {
-        // Kasus khusus ketika harga beli > 93% harga hari ini
         switch(kondisiBarang) {
             case 'Sangat Bagus':
                 if (skalaBarang === '1') persentasePenerimaan = 99;
@@ -31,7 +30,6 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
                 break;
         }
     } else {
-        // Kasus normal
         switch(kondisiBarang) {
             case 'Sangat Bagus':
                 if (skalaBarang === '1') persentasePenerimaan = 93;
@@ -52,6 +50,18 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
     // Hitung harga penerimaan
     const hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
 
-    // Tampilkan hasil
-    alert(`Persentase Penerimaan: ${persentasePenerimaan}%\nHarga Penerimaan: Rp ${hargaPenerimaan.toLocaleString('id-ID')}`);
+    // Tampilkan hasil dalam modal Bootstrap
+    const modalMessage = document.getElementById('modalMessage');
+    modalMessage.innerHTML = `
+        <div class="row">
+            <div class="col-12">
+                <p class="mb-2"><strong>Persentase Penerimaan:</strong> ${persentasePenerimaan}%</p>
+                <p class="mb-0"><strong>Harga Penerimaan:</strong> Rp ${hargaPenerimaan.toLocaleString('id-ID')}</p>
+            </div>
+        </div>
+    `;
+    
+    // Tampilkan modal
+    const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+    resultModal.show();
 });
