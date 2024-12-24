@@ -1,73 +1,151 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Pengaturan Persentase Penerimaan</title>
-    <style>
-        .settings-group {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        .input-group {
-            margin: 5px 0;
-        }
-        label {
-            display: inline-block;
-            width: 150px;
-        }
-    </style>
-</head>
-<body>
-    <h2>Pengaturan Persentase Penerimaan</h2>
-    
-    <div class="settings-group">
-        <h3>Harga Beli > 93% Harga Hari Ini</h3>
-        <div class="input-group">
-            <h4>Kondisi Sangat Bagus</h4>
-            <div>
-                <label>Skala 1:</label>
-                <input type="number" id="high-veryGood-scale1" min="0" max="100" step="0.1">
-            </div>
-            <div>
-                <label>Skala 2:</label>
-                <input type="number" id="high-veryGood-scale2" min="0" max="100" step="0.1">
-            </div>
-            <div>
-                <label>Skala 3:</label>
-                <input type="number" id="high-veryGood-scale3" min="0" max="100" step="0.1">
-            </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/jquery-3.6.3.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-brand">
+          <a href="#">
+            <img src="img/Melati.jfif" alt="Logo" />
+            Melati Gold Shop
+          </a>
         </div>
-        <!-- Add similar groups for other conditions -->
-    </div>
+        <div class="left-nav">
+          <div class=""><span id="tgl" class="font-weight-bold"></span></div>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle akun"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <span><i class="fa-solid fa-gear fa-2x"></i></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button class="dropdown-item" type="button"><a href="rule.html">Ubah Persentase</a></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="mainbar">
+        <h4>Konfigurasi Parameter Penerimaan</h4>
+        <div class="maintop">
+          <p>Hitung Presentase Penerimaan Harga</p>
+        </div>
 
-    <button onclick="saveSettings()">Simpan Pengaturan</button>
+        <div class="container mt-4">
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h3 class="h5 mb-0">Sangat Bagus</h3>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-4">
+                  <label class="form-label">Skala 1:</label>
+                  <input type="number" id="sangatBagusSkala1" value="99" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Skala 2:</label>
+                  <input type="number" id="sangatBagusSkala2" value="98" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label">Skala 3:</label>
+                  <input type="number" id="sangatBagusSkala3" value="96" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <script src="js/config.js"></script>
-    <script>
-        // Load current values
-        function loadCurrentValues() {
-            document.getElementById('high-veryGood-scale1').value = acceptanceConfig.highPrice.veryGood.scale1;
-            document.getElementById('high-veryGood-scale2').value = acceptanceConfig.highPrice.veryGood.scale2;
-            document.getElementById('high-veryGood-scale3').value = acceptanceConfig.highPrice.veryGood.scale3;
-            // Load other values similarly
-        }
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h3 class="h5 mb-0">Sedang</h3>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">Skala 1:</label>
+                  <input type="number" id="sedangSkala1" value="95" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Skala 2:</label>
+                  <input type="number" id="sedangSkala2" value="94" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-        function saveSettings() {
-            // Save to localStorage
-            acceptanceConfig.highPrice.veryGood.scale1 = parseFloat(document.getElementById('high-veryGood-scale1').value);
-            acceptanceConfig.highPrice.veryGood.scale2 = parseFloat(document.getElementById('high-veryGood-scale2').value);
-            acceptanceConfig.highPrice.veryGood.scale3 = parseFloat(document.getElementById('high-veryGood-scale3').value);
-            
-            localStorage.setItem('acceptanceConfig', JSON.stringify(acceptanceConfig));
-            alert('Pengaturan berhasil disimpan!');
-        }
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h3 class="h5 mb-0">Kurang Bagus</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="form-label">Nilai:</label>
+                  <input type="number" id="kurangBagus" value="78" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-        // Load saved settings if any
-        if(localStorage.getItem('acceptanceConfig')) {
-            acceptanceConfig = JSON.parse(localStorage.getItem('acceptanceConfig'));
-        }
-        
-        loadCurrentValues();
-    </script>
-</body>
+          <div class="d-grid gap-2">
+            <button onclick="saveConfig()" class="btn btn-primary btn-sm p-1">Simpan Konfigurasi</button>
+          </div>
+        </div>
+      </div>
+      <aside class="sidebar">
+        <ul>
+          <li>
+            <a href="index.html" class="dashboard">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="inpt-btn" data-target="inpt-show">Update Harga Perhiasan</a>
+          </li>
+          <li>
+            <a href="buyback.html" class="sell-btn" data-target="sell-show">Hitung Harga Buyback</a>
+          </li>
+        </ul>
+      </aside>
+    </main>
+  </body>
+  <script src="buyback.js"></script>
+  <script src="config.js"></script>
 </html>

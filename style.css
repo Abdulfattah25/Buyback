@@ -41,6 +41,46 @@
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.3);
     z-index: 999;
   }
+
+  .left-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .left-nav span {
+    font-size: 0.9rem;
+  }
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+  .dropdown-menu {
+    font-size: 0.9rem;
+  }
+  .dropdown span i {
+    color: #591927;
+  }
+  
+  .dropdown-menu li 
+   {
+  margin-left: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  }
+ 
+  .akun {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    border: none;
+    
+ 
+  }
   
   .boxPk {
     background-color: #00bbf9;
@@ -58,12 +98,7 @@
     padding: 10px;
     margin-bottom: 20px;
   }
-  .title {
-    font-size: 16px;  /* Sesuaikan ukuran yang diinginkan */
-} 
-.form-label {
-    font-size: 16px;
-}
+
   aside {
     width: 15%;
     background: var(--warna);
@@ -111,12 +146,12 @@
   }
   /* Add these new classes for better font control */
 .form-select.title {
-  font-size: 1rem !important;  /* 16px */
+  font-size: 0.9rem !important;  /* 16px */
   padding: 0.5rem;
 }
 
 .form-label {
-  font-size: 1rem !important;  /* 18px */
+  font-size: 0.9rem !important;  /* 18px */
   font-weight: 500;
   margin-bottom: 0.5rem;
 }

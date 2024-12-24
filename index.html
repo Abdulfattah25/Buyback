@@ -26,6 +26,13 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/jquery-3.6.3.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Dashboard</title>
   </head>
 
@@ -39,8 +46,19 @@
           </a>
         </div>
         <div class="left-nav">
-          <div class="">
-            <span id="tanggal" class="font-weight-bold"></span>
+          <div class=""><span id="tgl" class="font-weight-bold"></span></div>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle akun"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ><span><i class="fa-solid fa-gear fa-2x"></i></span></button>
+            <ul class="dropdown-menu">
+              <li>
+                <button class="dropdown-item" type="button"><a href="rule.html">Ubah Persentase</a></button>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -53,11 +71,11 @@
         </div>
         <div class="row justify-content-center">
           <div class="boxPk col-xl py-5 m-4 text-center text-dark d-flex flex-column align-items-center gap-3 rounded">
-            <a href="penjualanKotak.html" class="text-dark text-decoration-none">Update Harga per Gram Perhiasan</a>
+            <a href="#" class="text-dark text-decoration-none">Update Harga per Gram Perhiasan</a>
             <i class="fa-solid fa-gift fa-2x opacity-50"></i>
           </div>
           <div class="report col-xl py-5 m-4 text-center text-dark d-flex flex-column align-items-center gap-3 rounded">
-            <a href="Summary.html" class="text-dark text-decoration-none">Hitung Bucback Perhiasan</a>
+            <a href="buyback.html" class="text-dark text-decoration-none">Hitung Bucback Perhiasan</a>
             <i class="fa-solid fa-file-invoice fa-2x opacity-50"></i>
           </div>
         </div>
@@ -70,17 +88,17 @@
           <li>
             <a href="#" class="inpt-btn" data-target="inpt-show">
               Update Harga Perhiasan
-              <span class="fas fa-caret-down first"></span>
+            
             </a>
           </li>
           <li>
             <a href="buyback.html" class="sell-btn" data-target="sell-show">
               Hitung Harga Buyback
-              <span class="fas fa-caret-down first"></span>
+              
             </a>
           </li>
       </aside>
     </main>
-    <script src="js/melati.js"></script>
+    <script src="buyback.js"></script>
   </body>
 </html>
