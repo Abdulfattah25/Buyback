@@ -1,78 +1,62 @@
 document.getElementById('penerimaanForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Get config from localStorage
-    const config = JSON.parse(localStorage.getItem('penerimaanConfig')) || {
-        sangatBagus: {skala1: 99, skala2: 98, skala3: 96},
-        sedang: {skala1: 95, skala2: 94},
-        kurangBagus: 78
-    };
-
     const rows = document.querySelectorAll('#tablePenerimaan tbody tr');
     let resultsHTML = '';
     
     rows.forEach((row, index) => {
-        // Get values from each row
         const kadar = row.querySelector('select[name="kadar"]').value;
         const kondisiBarang = row.querySelector('select[name="kondisiBarang"]').value;
         const skalaBarang = row.querySelector('select[name="kondisiBarang"]').value;
         const hargaBeli = parseFloat(row.querySelector('input[name="hargaBeli"]').value);
         const hargaHariIni = parseFloat(row.querySelector('input[name="hargaHariIni"]').value);
 
-        // Calculate percentage and price
         const persentaseBeli = (hargaBeli / hargaHariIni) * 100;
-        let persentasePenerimaan;
+let persentasePenerimaan;
+let hargaPenerimaan;
 
-    // Logika untuk menentukan persentase penerimaan
-    if (persentaseBeli > 93) {
-        switch(kondisiBarang) {
-            case 'Sangat Bagus':
-                if (skalaBarang === '1') persentasePenerimaan = config.sangatBagus.skala1;
-                else if (skalaBarang === '2') persentasePenerimaan = config.sangatBagus.skala2;
-                else persentasePenerimaan = config.sangatBagus.skala3;
-                break;
-            case 'Sedang':
-                if (skalaBarang === '1') persentasePenerimaan = config.sedang.skala1;
-                else if (skalaBarang === '2') persentasePenerimaan = config.sedang.skala2;
-                else persentasePenerimaan = persentaseBeli;
-                break;
-            case 'Kurang Bagus':
-                persentasePenerimaan = persentaseBeli;
-                break;
-        }
+if (persentaseBeli >= 95) {
+    if (kondisiBarang === 'Sangat Bagus') {
+        // Perbedaan persentase yang lebih signifikan antara skala 1 dan 2
+        persentasePenerimaan = skalaBarang === '1' ? 99 : 92;
+    } else if (kondisiBarang === 'Sedang') {
+        persentasePenerimaan = skalaBarang === '1' ? 95 : 88;
+    } 
+} else {
+    if (kondisiBarang === 'Sangat Bagus') {
+        persentasePenerimaan = skalaBarang === '1' ? 93 : 85;
+    } else if (kondisiBarang === 'Sedang') {
+        persentasePenerimaan = skalaBarang === '1' ? 85 : 75;
     } else {
-        switch(kondisiBarang) {
-            case 'Sangat Bagus':
-                if (skalaBarang === '1') persentasePenerimaan = 93;
-                else if (skalaBarang === '2') persentasePenerimaan = 89;
-                else persentasePenerimaan = 87;
-                break;
-            case 'Sedang':
-                if (skalaBarang === '1') persentasePenerimaan = 84;
-                else if (skalaBarang === '2') persentasePenerimaan = 82;
-                else persentasePenerimaan = 80;
-                break;
-            case 'Kurang Bagus':
-                persentasePenerimaan = config.kurangBagus;
-                break;
-        }
+        persentasePenerimaan = skalaBarang === '1' ? 70 : 65;
     }
-    const hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
+}
 
-        // Add result to HTML
+const hargaPenerimaanNormal = (hargaHariIni * persentasePenerimaan) / 100;
+hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaanNormal);
+
+
         resultsHTML += `
             <div class="result-item ${index !== rows.length - 1 ? 'border-bottom mb-3 pb-3' : ''}">
                 <h6 class="fw-bold">Data ${index + 1}</h6>
                 <div class="row">
                     <div class="col-12">
                         <p class="mb-2"><strong>Kadar:</strong> ${kadar}</p>
-                        <p class="mb-2"><strong>Persentase Penerimaan:</strong> ${persentasePenerimaan}%</p>
+                       
                         <p class="mb-0"><strong>Harga Penerimaan:</strong> Rp ${hargaPenerimaan.toLocaleString('id-ID')}</p>
                     </div>
                 </div>
             </div>
         `;
-    });
+
+
+    // Display results
+    const resultsContainer = document.getElementById('results');
+    if (resultsContainer) {
+        resultsContainer.innerHTML = resultsHTML;
+    }
+});
+
 
     // Update modal content
     const modalMessage = document.getElementById('modalMessage');
