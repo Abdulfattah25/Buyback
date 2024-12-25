@@ -12,29 +12,29 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
         const hargaHariIni = parseFloat(row.querySelector('input[name="hargaHariIni"]').value);
 
         const persentaseBeli = (hargaBeli / hargaHariIni) * 100;
-        let persentasePenerimaan;
-        let hargaPenerimaan;
+let persentasePenerimaan;
+let hargaPenerimaan;
 
-        if (persentaseBeli >= 95) {
-            if (kondisiBarang === 'Sangat Bagus') {
-                persentasePenerimaan = skalaBarang === '1' ? 99 : 97;
-            } else if (kondisiBarang === 'Sedang') {
-                persentasePenerimaan = skalaBarang === '1' ? 95 : 94;
-            } else {
-                persentasePenerimaan = 70;
-            }
-        } else {
-            if (kondisiBarang === 'Sangat Bagus') {
-                persentasePenerimaan = skalaBarang === '1' ? 90 : 87;
-            } else if (kondisiBarang === 'Sedang') {
-                persentasePenerimaan = skalaBarang === '1' ? 85 : 80;
-            } else {
-                persentasePenerimaan = 70;
-            }
-        }
+if (persentaseBeli >= 95) {
+    if (kondisiBarang === 'Sangat Bagus') {
+        // Perbedaan persentase yang lebih signifikan antara skala 1 dan 2
+        persentasePenerimaan = skalaBarang === '1' ? 99 : 92;
+    } else if (kondisiBarang === 'Sedang') {
+        persentasePenerimaan = skalaBarang === '1' ? 95 : 88;
+    } 
+} else {
+    if (kondisiBarang === 'Sangat Bagus') {
+        persentasePenerimaan = skalaBarang === '1' ? 93 : 85;
+    } else if (kondisiBarang === 'Sedang') {
+        persentasePenerimaan = skalaBarang === '1' ? 85 : 75;
+    } else {
+        persentasePenerimaan = skalaBarang === '1' ? 70 : 65;
+    }
+}
 
-        const hargaPenerimaanNormal = (hargaHariIni * persentasePenerimaan) / 100;
-        hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaanNormal);
+const hargaPenerimaanNormal = (hargaHariIni * persentasePenerimaan) / 100;
+hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaanNormal);
+
 
         resultsHTML += `
             <div class="result-item ${index !== rows.length - 1 ? 'border-bottom mb-3 pb-3' : ''}">
@@ -42,7 +42,7 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
                 <div class="row">
                     <div class="col-12">
                         <p class="mb-2"><strong>Kadar:</strong> ${kadar}</p>
-                        <p class="mb-2"><strong>Persentase Penerimaan:</strong> ${persentasePenerimaan}%</p>
+                       
                         <p class="mb-0"><strong>Harga Penerimaan:</strong> Rp ${hargaPenerimaan.toLocaleString('id-ID')}</p>
                     </div>
                 </div>
