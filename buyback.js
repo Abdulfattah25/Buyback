@@ -3,37 +3,59 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
 
     const rows = document.querySelectorAll('#tablePenerimaan tbody tr');
     let resultsHTML = '';
-    
+   
     rows.forEach((row, index) => {
         const kadar = row.querySelector('select[name="kadar"]').value;
+        const asalToko = row.querySelector('select[name="asalToko"]').value;
         const kondisiBarang = row.querySelector('select[name="kondisiBarang"]').value;
-        const skalaBarang = row.querySelector('select[name="kondisiBarang"]').value;
         const hargaBeli = parseFloat(row.querySelector('input[name="hargaBeli"]').value);
         const hargaHariIni = parseFloat(row.querySelector('input[name="hargaHariIni"]').value);
 
         const persentaseBeli = (hargaBeli / hargaHariIni) * 100;
-let persentasePenerimaan;
-let hargaPenerimaan;
+        let persentasePenerimaan;
 
-if (persentaseBeli >= 95) {
-    if (kondisiBarang === 'Sangat Bagus') {
-        // Perbedaan persentase yang lebih signifikan antara skala 1 dan 2
-        persentasePenerimaan = skalaBarang === '1' ? 99 : 92;
-    } else if (kondisiBarang === 'Sedang') {
-        persentasePenerimaan = skalaBarang === '1' ? 95 : 88;
-    } 
-} else {
-    if (kondisiBarang === 'Sangat Bagus') {
-        persentasePenerimaan = skalaBarang === '1' ? 93 : 85;
-    } else if (kondisiBarang === 'Sedang') {
-        persentasePenerimaan = skalaBarang === '1' ? 85 : 75;
-    } else {
-        persentasePenerimaan = skalaBarang === '1' ? 70 : 65;
-    }
-}
+        if (asalToko === 'Toko Melati') {
+            if (persentaseBeli >= 90) {
+                switch(kondisiBarang) {
+                    case '1': persentasePenerimaan = 99; break;
+                    case '2': persentasePenerimaan = 97; break;
+                    case '3': persentasePenerimaan = 95; break;
+                    case '4': persentasePenerimaan = 93; break;
+                    case '5': 
+                    case '6':
+                    case '7':
+                    case '8': persentasePenerimaan = 90; break;
+                }
+            } else {
+                switch(kondisiBarang) {
+                    case '1': persentasePenerimaan = 89; break;
+                    case '2': persentasePenerimaan = 87; break;
+                    case '3': persentasePenerimaan = 85; break;
+                    case '4': persentasePenerimaan = 83; break;
+                    case '5': persentasePenerimaan = 80; break;
+                    case '6': persentasePenerimaan = 75; break;
+                    case '7': persentasePenerimaan = 72; break;
+                    case '8': persentasePenerimaan = 70; break;
+                }
+            }
+        } else { // Luar Toko
+            switch(kondisiBarang) {
+                case '1': persentasePenerimaan = 72; break;
+                case '2': persentasePenerimaan = 70; break;
+                case '3': persentasePenerimaan = 65; break;
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8': persentasePenerimaan = 60; break;
+            }
+        }
 
-const hargaPenerimaanNormal = (hargaHariIni * persentasePenerimaan) / 100;
-hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaanNormal);
+        const hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
+        
+        // Di sini Anda bisa menambahkan kode untuk menampilkan hasil
+   
+hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaan);
 
 
         resultsHTML += `
@@ -93,21 +115,18 @@ document.getElementById('btnTambahAksesoris').addEventListener('click', function
             </select>
         </td>
         <td>
-            <select name="kondisiBarang" class="form-select form-select-sm" required>
-                <option value="" disabled selected>Pilih Kondisi</option>
-                <option value="Sangat Bagus">Sangat Bagus</option>
-                <option value="Sedang">Sedang</option>
-                <option value="Kurang Bagus">Kurang Bagus</option>
-            </select>
-        </td>
-        <td>
-            <select name="kondisiBarang" class="form-select form-select-sm" required>
-                <option value="" disabled selected>Pilih Skala</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </td>
+                    <select id="kondisiBarang" name="kondisiBarang" class="form-select form-select-sm" required>
+                      <option value="" disabled selected>Pilih Kondisi Barang</option>
+                      <option value="1">Mengkilap, Mulus, Banyak Peminat</option>
+                      <option value="2">Mengkilap, Sedikit Baret, Banyak Peminat</option>
+                      <option value="3">Sedikit Kusam, Sedikit Baret, Banyak Peminat</option>
+                      <option value="4">Sedikit Kusam,Banyak Baret, Banyak Peminat</option>
+                      <option value="5">Kusam, Sedikit Baret, Banyak Peminat</option>
+                      <option value="6">Kusam, Banyak Baret, Banyak Peminat</option>
+                      <option value="7">Sedikit Kusam, Sedikit Baret, Sedikit Peminat</option>
+                      <option value="8">Kusam, Banyak Baret, Sedikit Peminat</option>
+                    </select>
+                  </td>
         <td>
             <input
                 type="number"
