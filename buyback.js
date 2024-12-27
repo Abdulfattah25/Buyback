@@ -51,11 +51,12 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
             }
         }
 
-        const hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
+        let hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
+        hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaan);
         
         // Di sini Anda bisa menambahkan kode untuk menampilkan hasil
    
-hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaan);
+
 
 
         resultsHTML += `
