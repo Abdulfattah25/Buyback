@@ -55,8 +55,14 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
             }
             hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
         }
+
+      
         
         // Di sini Anda bisa menambahkan kode untuk menampilkan hasil
+   
+
+
+
         resultsHTML += `
             <div class="result-item ${index !== rows.length - 1 ? 'border-bottom mb-3 pb-3' : ''}">
                 <h6 class="fw-bold">Data ${index + 1}</h6>
