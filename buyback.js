@@ -1,6 +1,6 @@
 document.getElementById('penerimaanForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
+    
     const rows = document.querySelectorAll('#tablePenerimaan tbody tr');
     let resultsHTML = '';
    
@@ -13,6 +13,7 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
 
         const persentaseBeli = (hargaBeli / hargaHariIni) * 100;
         let persentasePenerimaan;
+        let hargaPenerimaan;
 
         if (asalToko === 'Toko Melati') {
             if (persentaseBeli >= 90) {
@@ -28,17 +29,20 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
                 }
             } else {
                 switch(kondisiBarang) {
-                    case '1': persentasePenerimaan = 89; break;
-                    case '2': persentasePenerimaan = 87; break;
-                    case '3': persentasePenerimaan = 85; break;
-                    case '4': persentasePenerimaan = 83; break;
-                    case '5': persentasePenerimaan = 80; break;
+                    case '1': persentasePenerimaan = 94; break;
+                    case '2': persentasePenerimaan = 88; break;
+                    case '3': persentasePenerimaan = 86; break;
+                    case '4': persentasePenerimaan = 84; break;
+                    case '5': persentasePenerimaan = 82; break;
                     case '6': persentasePenerimaan = 75; break;
                     case '7': persentasePenerimaan = 72; break;
                     case '8': persentasePenerimaan = 70; break;
                 }
             }
-        } else { // Luar Toko
+            hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
+            hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaan);
+            
+        } else {
             switch(kondisiBarang) {
                 case '1': persentasePenerimaan = 72; break;
                 case '2': persentasePenerimaan = 70; break;
@@ -49,37 +53,29 @@ document.getElementById('penerimaanForm').addEventListener('submit', function(e)
                 case '7':
                 case '8': persentasePenerimaan = 60; break;
             }
+            hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
         }
-
-        const hargaPenerimaan = (hargaHariIni * persentasePenerimaan) / 100;
         
         // Di sini Anda bisa menambahkan kode untuk menampilkan hasil
-   
-hargaPenerimaan = Math.max(hargaBeli, hargaPenerimaan);
-
-
         resultsHTML += `
             <div class="result-item ${index !== rows.length - 1 ? 'border-bottom mb-3 pb-3' : ''}">
                 <h6 class="fw-bold">Data ${index + 1}</h6>
                 <div class="row">
                     <div class="col-12">
                         <p class="mb-2"><strong>Kadar:</strong> ${kadar}</p>
-                       
+                        <p class="mb-2"><strong>Kondisi:</strong> ${row.querySelector('select[name="kondisiBarang"] option:checked').text}</p>
+                        <p class="mb-2"><strong>Persentase Penerimaan:</strong> ${persentasePenerimaan}%</p>
                         <p class="mb-0"><strong>Harga Penerimaan:</strong> Rp ${hargaPenerimaan.toLocaleString('id-ID')}</p>
                     </div>
                 </div>
             </div>
         `;
-
-
     // Display results
     const resultsContainer = document.getElementById('results');
     if (resultsContainer) {
         resultsContainer.innerHTML = resultsHTML;
     }
 });
-
-
     // Update modal content
     const modalMessage = document.getElementById('modalMessage');
     modalMessage.innerHTML = resultsHTML;
